@@ -1,4 +1,4 @@
-<?php # Script 9.5 - register.php #2
+<?php
 // This script performs an INSERT query to add a record to the users table.
 
 $page_title = 'Register';
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Check for a password and match against the confirmed password:
 	if (!empty($_POST['pass1'])) {
 		if ($_POST['pass1'] != $_POST['pass2']) {
-			$errors[] = 'Your password did not match the confirmed password.';
+			$errors[] = 'Your password\'s do not match.';
 		} else {
 			$p = mysqli_real_escape_string($dbc, trim($_POST['pass1']));
 		}
