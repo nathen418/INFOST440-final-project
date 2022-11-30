@@ -15,6 +15,76 @@
 <meta property="og:title" content="440 Blog">
 <meta property="og:description" content="The badly designed blog">
 <meta property="theme-color" content="#6761A8">
+
+<style>
+	#sort {
+    	text-align: center;
+	}
+
+	/* Get guestbook cards in center, also make responsive */
+	.card {
+		width: 90%;
+		max-width: 600px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+		box-shadow: 2px 5px 5px lightgray;
+		border-radius: 5px;
+	}
+
+	.header {
+		background-color: #dbd1c4;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 5px 20px;
+		border-radius: 5px 5px 0 0;
+	}
+
+	.header h1 {
+		font-size: 1.4em;
+		margin-right: 20px;
+	}
+
+	.header p {
+		font-weight: bold;
+	}
+
+	.content {
+		padding: 5px 20px;
+	}
+
+	/* Differentiate date from guestbook comment */
+	.content > .date {
+		font-style: italic;
+		font-size: 0.9em;
+		text-align: right;
+		color: gray;
+	}
+
+	/* Nav bar  */
+	#navigation {
+		display: flex;
+		justify-content: right;
+	}
+
+	#navigation ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+	}
+
+	#navigation li {
+		float: left;
+	}
+
+	#navigation li a {
+		display: block;
+		padding: 8px;
+		background-color: #dddddd;
+	}
+</style>
+
 </head>
 <body>
 	<div id="navigation">
