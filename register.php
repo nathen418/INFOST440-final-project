@@ -1,4 +1,4 @@
-<?php # Script 9.5 - register.php #2
+<?php
 // This script performs an INSERT query to add a record to the users table.
 
 $page_title = 'Register';
@@ -15,27 +15,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (empty($_POST['first_name'])) {
 		$errors[] = 'You forgot to enter your first name.';
 	} else {
-		$fn = mysqli_real_escape_string($dbc, trim($_POST['first_name']));
+		$fname = mysqli_real_escape_string($dbc, trim($_POST['first_name']));
 	}
 	
 	// Check for a last name:
 	if (empty($_POST['last_name'])) {
 		$errors[] = 'You forgot to enter your last name.';
 	} else {
-		$ln = mysqli_real_escape_string($dbc, trim($_POST['last_name']));
+		$lname = mysqli_real_escape_string($dbc, trim($_POST['last_name']));
 	}
 	
 	// Check for an email address:
 	if (empty($_POST['email'])) {
 		$errors[] = 'You forgot to enter your email address.';
 	} else {
-		$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+		$email = mysqli_real_escape_string($dbc, trim($_POST['email']));
 	}
 	
 	// Check for a password and match against the confirmed password:
 	if (!empty($_POST['pass1'])) {
 		if ($_POST['pass1'] != $_POST['pass2']) {
-			$errors[] = 'Your password did not match the confirmed password.';
+			$errors[] = 'Your password\'s do not match.';
 		} else {
 			$p = mysqli_real_escape_string($dbc, trim($_POST['pass1']));
 		}
@@ -48,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		// Register the user in the database...
 		
 		// Make the query:
-		$q = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fn', '$ln', '$e', SHA2('$p',256), NOW() )";		
-		$r = @mysqli_query ($dbc, $q); // Run the query.
-		if ($r) { // If it ran OK.
+		$query = "INSERT INTO users (first_name, last_name, email, pass, registration_date) VALUES ('$fname', '$lname', '$email', SHA2('$p',256), NOW() )";		
+		$result = @mysqli_query ($dbc, $query); // Run the query.
+		if ($result) { // If it ran OK.
 		
 			// Print a message:
 			echo '<h1>Thank you!</h1>
@@ -63,9 +63,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			<p class="error">You could not be registered due to a system error. We apologize for any inconvenience.</p>'; 
 			
 			// Debugging message:
-			echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+			echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $query . '</p>';
 						
-		} // End of if ($r) IF.
+		} // End of if ($result) IF.
 		
 		mysqli_close($dbc); // Close the database connection.
 

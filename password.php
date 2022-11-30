@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (empty($_POST['email'])) {
 		$errors[] = 'You forgot to enter your email address.';
 	} else {
-		$e = mysqli_real_escape_string($dbc, trim($_POST['email']));
+		$email = mysqli_real_escape_string($dbc, trim($_POST['email']));
 	}
 
 	// Check for the current password:
@@ -40,17 +40,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if (empty($errors)) { // If everything's OK.
 
 		// Check that they've entered the right email address/password combination:
-		$q = "SELECT user_id FROM users WHERE (email='$e' AND pass=SHA2('$p',256) )";
-		$r = @mysqli_query($dbc, $q);
-		$num = @mysqli_num_rows($r);
+		$query = "SELECT user_id FROM users WHERE (email='$email' AND pass=SHA2('$p',256) )";
+		$result = @mysqli_query($dbc, $query);
+		$num = @mysqli_num_rows($result);
 		if ($num == 1) { // Match was made.
 	
 			// Get the user_id:
-			$row = mysqli_fetch_array($r, MYSQLI_NUM);
+			$row = mysqli_fetch_array($result, MYSQLI_NUM);
 
 			// Make the UPDATE query:
-			$q = "UPDATE users SET pass=SHA2('$np',256) WHERE user_id=$row[0]";		
-			$r = @mysqli_query($dbc, $q);
+			$query = "UPDATE users SET pass=SHA2('$np',256) WHERE user_id=$row[0]";		
+			$result = @mysqli_query($dbc, $query);
 			
 			if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				<p class="error">Your password could not be changed due to a system error. We apologize for any inconvenience.</p>'; 
 	
 				// Debugging message:
-				echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+				echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $query . '</p>';
 	
 			}
 
