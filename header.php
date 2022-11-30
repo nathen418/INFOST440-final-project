@@ -17,9 +17,9 @@
 <meta property="theme-color" content="#6761A8">
 
 <style>
-	 #sort {
-        text-align: center;
-    }
+	#sort {
+    	text-align: center;
+	}
 
 	/* Get guestbook cards in center, also make responsive */
 	.card {
