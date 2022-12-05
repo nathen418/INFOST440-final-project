@@ -49,12 +49,12 @@
 		font-weight: bold;
 	}
 
-	.content {
+	.blogpost_content {
 		padding: 5px 20px;
 	}
 
-	/* Differentiate date from guestbook comment */
-	.content > .date {
+	/* Differentiate date from blogpost content */
+	.blogpost_content > .timestamp {
 		font-style: italic;
 		font-size: 0.9em;
 		text-align: right;
