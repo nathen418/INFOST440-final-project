@@ -73,6 +73,7 @@
 			justify-content: right;
 		}
 
+
 		#navigation ul {
 			list-style-type: none;
 			margin: 0;
@@ -111,13 +112,22 @@
 			<li><a href="register.php">Register</a></li>
 			<li><a href="view_users.php">View Users</a></li>
 			<li><a href="password.php">Change Password</a></li>
+			<?php
+				if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
+			?>
+			<li><a href="adminpanel.php">Admin Panel</a></li>
+			<?php 
+				}
+			?>
 			<li>
-				<?php // Create a login/logout link:
-				if ((isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php')) {
+			<?php 
+				// Create a login/logout link:
+				if ( (isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php') ) {
 					echo '<a href="logout.php">Logout</a>';
 				} else {
 					echo '<a href="login.php">Login</a>';
-				} ?>
+				}
+			?>
 			</li>
 		</ul>
 	</div>
