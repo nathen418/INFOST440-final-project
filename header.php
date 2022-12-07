@@ -66,7 +66,7 @@
 		text-align: right;
 		color: gray;
 	}
-
+  
 		/* Nav bar  */
 		#navigation {
 			display: flex;
