@@ -26,7 +26,12 @@
 	</div>
 </div>
 
-<!-- Need to hide if user is not logged in -->
+<?php
+    }
+    if (isset($_SESSION['user_id'])) {
+        // Form not visible if user is not logged in
+?>
+
 <p>Add Comment</p>
 <form action=<?php echo "viewcomments.php?blogpost_id=" . $blogid;?> method="post">
     <textarea name="comment" id="comment" cols="40" rows="5"></textarea><br />

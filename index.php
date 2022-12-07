@@ -84,9 +84,16 @@
 		<p class="body"><?php echo $row['blogpost_body']; ?></p>
 		<p class="timestamp"><?php echo $row['blogpost_timestamp']; ?></p>
 		<p>
-			<a href=<?php echo "viewcomments.php?blogpost_id=" . $row['blogpost_id']; ?>>View Comments</a> |
+			<a href=<?php echo "viewcomments.php?blogpost_id=" . $row['blogpost_id']; ?>>View Comments</a>
+			<?php 
+				if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
+			?>
+			|
 			<a href=<?php echo "update.php?id=" . $row['blogpost_id']; ?>>Edit</a> | 
 			<a href=<?php echo "delete.php?id=" . $row['blogpost_id']; ?>>Delete</a>
+			<?php
+						}		
+			?>
 		</p>
 	</div>
 </div>
