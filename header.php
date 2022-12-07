@@ -86,7 +86,7 @@
 			background-color: #dddddd;
 		}
 
-		.body {
+		body {
 			/* fallback for old browsers */
 			background: #6a11cb;
 			/* Chrome 10-25, Safari 5.1-6 */
