@@ -68,7 +68,7 @@
 <p>Here are the Guestbook Comments!</p>
 
 <?php
-	// Fetches all guestbook entries, then generates cards
+	// Fetches all blogposts, then generates cards
 	$query = "SELECT * FROM blogposts ORDER BY $order_by LIMIT $start, $display";
 	$results = mysqli_query($dbc, $query);
 
@@ -76,18 +76,19 @@
 ?>
 
 <div class="card">
-<div class="header">
-	<h1><?php echo $row['fname'] . " " . $row['lname']; ?></h1>
-	<p><?php echo $row['guestbook_id']; ?></p>
-</div>
-<div class="content">
-	<p class="comment"><?php echo $row['comment']; ?></p>
-	<p class="date"><?php echo $row['date']; ?></p>
-	<p>
-		<a href=<?php echo "update.php?id=" . $row['guestbook_id']; ?>>Edit</a> | 
-		<a href=<?php echo "delete.php?id=" . $row['guestbook_id']; ?>>Delete</a>
-	</p>
-</div>
+	<div class="header">
+		<h1><?php echo $row['blogpost_title']; ?></h1>
+		<p><?php echo $row['blogpost_id']; ?></p>
+	</div>
+	<div class="blogpost_content">
+		<p class="body"><?php echo $row['blogpost_body']; ?></p>
+		<p class="timestamp"><?php echo $row['blogpost_timestamp']; ?></p>
+		<p>
+			<a href=<?php echo "viewcomments.php?blogpost_id=" . $row['blogpost_id']; ?>>View Comments</a> |
+			<a href=<?php echo "update.php?id=" . $row['blogpost_id']; ?>>Edit</a> | 
+			<a href=<?php echo "delete.php?id=" . $row['blogpost_id']; ?>>Delete</a>
+		</p>
+	</div>
 </div>
 
 <?php

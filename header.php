@@ -55,14 +55,18 @@
 			padding: 5px 20px;
 		}
 
-		/* Differentiate date from guestbook comment */
-		.content>.date {
-			font-style: italic;
-			font-size: 0.9em;
-			text-align: right;
-			color: gray;
-		}
+	.blogpost_content {
+		padding: 5px 20px;
+	}
 
+	/* Differentiate date from blogpost content */
+	.blogpost_content > .timestamp {
+		font-style: italic;
+		font-size: 0.9em;
+		text-align: right;
+		color: gray;
+	}
+  
 		/* Nav bar  */
 		#navigation {
 			display: flex;
