@@ -139,9 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 								}
 								?>
 							</div>
-							<div>
-								<p class="mb-0">Already have an account?<a href="login.php" class="text-white-50 fw-bold">Log In</a></p>
-							</div>
 						</div>
 					</div>
 				</div>
