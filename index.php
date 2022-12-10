@@ -1,13 +1,15 @@
 <?php
 //header
-$page_title = 'Home';
+$page_title = 'Home | bLog';
 include('header.php');
 include('mysqli_connect.php');
 
-//If a user name is entered display login message
-if (isset($_SESSION['first_name'])) {
-	echo "You currently logged in as {$_SESSION['first_name']}. Welcome to our website!";
-}
+
+?>
+<p class="h2 text-center text-white" style="margin-top:4rem">bLog</p>
+<p class="h4 text-center text-white">The less useful version of wordpress</p> 
+
+<?php
 // Display a list of posts here
 // On each post, there should be a link to view the post and comments, and a link to add a comment. If the user is logged in, there should be a link to edit the post and delete the post if it was made by the logged in user. 
 
@@ -59,14 +61,11 @@ switch ($sort) {
 ?>
 
 <!-- Sort Menu -->
-<div id="sort">
-	<strong>Sort By: </strong>
-	<a href="?sort=recent">Most Recent</a> |
-	<a href="?sort=oldest">Oldest</a>
+<div class="text-white" id="sort">
+	<strong>Sort By:</strong>
+	<a href="?sort=recent" class="btn btn-primary">Newest</a> | 
+	<a href="?sort=oldest" class="btn btn-primary">Oldest</a>
 </div>
-
-<p>Here are the Guestbook Comments!</p>
-
 <?php
 // Fetches all blogposts, then generates cards
 $query = "SELECT * FROM blogposts ORDER BY $order_by LIMIT $start, $display";
@@ -75,11 +74,11 @@ $results = mysqli_query($dbc, $query);
 while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 ?>
 
-<div class="card bg-dark text-white" , style="width:600px">
+<div class="card bg-dark text-white p-1" , style="width:600px; margin-top:1rem">
 	<div class="card-body">
 		<h5 class="card-title"><?php echo $row['blogpost_title']; ?> | ID <?php echo $row['blogpost_id']; ?></h5>
 		<p class="card-text"><?php echo $row['blogpost_body']; ?></p>
-		<a href=<?php echo "viewcomments.php?blogpost_id=" . $row['blogpost_id']; ?> class="btn btn-primary">View Comments</a>
+		<a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id']; ?> class="btn btn-success">View Post</a>
 		
 		<?php
 			if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
