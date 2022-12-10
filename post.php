@@ -1,12 +1,12 @@
 <?php
 // Needed imports to make guestbook work
 $page_title = "Make a Post | bLog";
-include('header.php');
 $errors = array();
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	require('mysqli_connect.php'); // Connect to the db.
+    require('includes/login_functions.inc.php'); // Import the redirect_user function
 
 	// Check for a first name:
 	if (empty($_POST['title'])) {
@@ -21,10 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} else {
 		$lname = mysqli_real_escape_string($dbc, trim($_POST['body']));
 	}
-    if (!$errors[0]){
-        echo "<script> window.location.assign('index.php'); </script>";
+    if (empty($errors)){
+        redirect_user();
     }
 }
+include('header.php');
 ?>
 <br />
 <form action="post.php" method="POST">
