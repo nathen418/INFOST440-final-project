@@ -1,7 +1,7 @@
 <?php
 // This script performs an INSERT query to add a record to the users table.
 
-$page_title = 'Register';
+$page_title = 'Register | bLog';
 include('header.php');
 $errors = array();
 // Check for form submission:

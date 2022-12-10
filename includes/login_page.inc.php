@@ -3,7 +3,7 @@
 // and it creates the entire login page, including the form.
 
 // Include the header:
-$page_title = 'Login';
+$page_title = 'Login | bLog';
 include('header.php');
 ?>
 
