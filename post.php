@@ -1,6 +1,6 @@
 <?php
 // Needed imports to make guestbook work
-$page_title = "Make a Post";
+$page_title = "Make a Post | bLog";
 include('header.php');
 $errors = array();
 // Check for form submission:
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 <br />
-<form action="createblogpost.php" method="POST">
+<form action="post.php" method="POST">
     <section class="vh-100">
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center">

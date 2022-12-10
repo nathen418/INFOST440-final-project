@@ -1,5 +1,5 @@
 <?php
-$page_title = "View Comments";
+$page_title = "View Post | bLog";
 include('header.php');
 include('mysqli_connect.php');
 
@@ -15,6 +15,7 @@ $commentResult = mysqli_query($dbc, $queryComments);
 
 while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
 ?>
+<p class="h2 text-center text-white" style="margin-top:4rem">View & Add Comments</p>
 
     <div class="card bg-dark text-white" style="width:600px">
         <div class="card-body">
@@ -26,10 +27,8 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
     if (isset($_SESSION['user_id'])) {
         // Form not visible if user is not logged in
         ?>
-
-            <p>Add Comment</p>
-            <form action=<?php echo "viewcomments.php?blogpost_id=" . $blogid; ?> method="post">
-                <label class="form-label" for="comment">Comment</label>
+            <form style="margin-top:2rem" action=<?php echo "comments.php?blogpost_id=" . $blogid; ?> method="post">
+                <label class="form-label" for="comment">New Comment</label>
                 <div class="form-outline form-white mb-4">
                     <textarea name="comment" id="comment" class="form-control form-control-lg" maxlength="1024" value="<?php if (isset($_POST['comment'])) echo $_POST['comment']; ?>"></textarea>
                 </div>
@@ -53,7 +52,7 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
                 if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
             ?>
 
-            <!-- Make these buttons functional -->
+                <!-- Make these buttons functional -->
                 <a href=<?php ?> class="btn btn-warning">Edit</a>
                 <a href=<?php ?> class="btn btn-danger">Delete</a>
             <?php
@@ -64,5 +63,4 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
 
 <?php
             }
-
 ?>
