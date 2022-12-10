@@ -1,12 +1,7 @@
 <?php # Script 9.6 - view_users.php #2
 // This script retrieves all the records from the users table.
 
-$page_title = 'View the Current Users';
-include ('header.php');
-
 // Page header:
-echo '<h1>Registered Users</h1>';
-
 require ('mysqli_connect.php'); // Connect to the db.
 		
 // Make the query:
@@ -22,9 +17,8 @@ if ($num > 0) { // If it ran OK, display the records.
 	echo "<p>There are currently $num registered users.</p>\n";
 
 	// Table header.
-	echo '<table align="center" cellspacing="3" cellpadding="3" width="75%">
-	<tr><td align="left"><b>Name</b></td><td align="left"><b>Date Registered</b></td></tr>
-';
+	echo '<table class="text-white" cellspacing="3" cellpadding="3" width="75%">
+	<tr><td align="left"><b>Name</b></td><td align="left"><b>Date Registered</b></td></tr>';
 	
 	// Fetch and print all the records:
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
