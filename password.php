@@ -1,7 +1,7 @@
 <?php # Script 9.7 - password.php
 // This page lets a user change their password.
 
-$page_title = 'Change Your Password';
+$page_title = 'Change Password | bLog';
 include ('header.php');
 $errors = array();
 
