@@ -61,6 +61,7 @@
 		.alert {
 			width: 100%;
 			max-width: 600px;
+			margin: 1rem auto;
 		}
 
 		#pages-container {
