@@ -52,6 +52,10 @@
 		#comments-container .card:last-of-type {
 			border: none;
 		}
+
+		.alert p {
+			margin: 0.5rem;
+		}
 	</style>
 
 </head>

@@ -72,7 +72,7 @@ while ($row = mysqli_fetch_array($commentResult, MYSQLI_ASSOC)) {
             <p class="card-text"><?php echo $row['comment_body']; ?></p>
 
             <?php
-                if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
+                if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1 || $_SESSION['user_id'] == $row['user_id'])) {
             ?>
 
                 <!-- Make these buttons functional -->
