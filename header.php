@@ -46,6 +46,9 @@
 
 		#comments-container .card {
 			border: none;
+			padding-bottom: 20px;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
 			border-bottom: 2px solid gray;
 			margin-bottom: 1rem
 		}
