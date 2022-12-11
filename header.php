@@ -42,51 +42,46 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded-bottom ">
+	<nav class="navbar navbar-expand navbar-dark bg-dark rounded-bottom">
 		<div class="container-fluid">
-			<a class="navbar-brand mt-2 mt-lg-0" href="#">
-				<img src="resources/logo.png" height="32" alt="bLog Logo" loading="lazy" />
-			</a>
-			<a class="navbar-brand" href="index.php">bLog</a>
-			<button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-				<i class="fas fa-bars"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<a class="navbar-brand" href="index.php">
+					<img src="resources/logo.png" height="32" alt="bLog Logo" loading="lazy" />
+				</a>
+				<a class="navbar-brand" href="index.php">bLog</a>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="index.php">Home</a>
+				</li>
+				<?php
+				if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
+				?>
 					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="index.php">Home</a>
+						<a class="nav-link" href="post.php">Post</a>
 					</li>
-					<?php
-					if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
-					?>
-						<li class="nav-item">
-							<a class="nav-link" href="post.php">Post</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="admin.php">Admin Panel</a>
-						</li>
-					<?php }
-					// Create a login/logout link:
-					if ((isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php')) { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="logout.php">Logout</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="password.php">Change Password</a>
-						</li>
-					<?php } else { ?>
-						<li class="nav-item">
-							<a class="nav-link" href="login.php">Login</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="register.php">Register</a>
-						</li>
-					<?php } ?>
 					<li class="nav-item">
-						<a class="nav-link" href=""><?php echo @$_SESSION['first_name']; ?></a>
+						<a class="nav-link" href="admin.php">Admin Panel</a>
 					</li>
-				</ul>
-			</div>
+				<?php }
+				// Create a login/logout link:
+				if ((isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php')) { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="logout.php">Logout</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="password.php">Change Password</a>
+					</li>
+				<?php } else { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="login.php">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="register.php">Register</a>
+					</li>
+				<?php } ?>
+				<li class="nav-item">
+					<a class="nav-link" href=""><?php echo @$_SESSION['first_name']; ?></a>
+				</li>
+			</ul>
 		</div>
 	</nav>
 	<div id="content">
