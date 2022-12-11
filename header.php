@@ -56,6 +56,12 @@
 		.alert p {
 			margin: 0.5rem;
 		}
+
+		#pages-container {
+			width: 100%;
+			max-width: 600px;
+			margin: 0 auto;
+		}
 	</style>
 
 </head>
