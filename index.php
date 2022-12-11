@@ -7,7 +7,7 @@ include('mysqli_connect.php');
 
 ?>
 <p class="h2 text-center text-white" style="margin-top:4rem">bLog</p>
-<p class="h4 text-center text-white">The less useful version of wordpress</p> 
+<p class="h4 text-center text-white">The less useful version of wordpress</p>
 
 <?php
 // Display a list of posts here
@@ -63,24 +63,26 @@ switch ($sort) {
 <!-- Sort Menu -->
 <div class="text-white" id="sort">
 	<strong>Sort By:</strong>
-	<a href="?sort=recent" class="btn btn-primary">Newest</a> | 
+	<a href="?sort=recent" class="btn btn-primary">Newest</a> |
 	<a href="?sort=oldest" class="btn btn-primary">Oldest</a>
 </div>
 <?php
 // Fetches all blogposts, then generates cards
-$query = "SELECT * FROM blogposts ORDER BY $order_by LIMIT $start, $display";
+$query = "SELECT * FROM blogposts JOIN users USING (user_id) ORDER BY $order_by LIMIT $start, $display";
+
+// $query = "SELECT * FROM blogposts ORDER BY $order_by LIMIT $start, $display";
 $results = mysqli_query($dbc, $query);
 
 while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 ?>
 
-<div class="card bg-dark text-white p-1" , style="margin-top:1rem">
-	<div class="card-body">
-		<h5 class="card-title"><?php echo $row['blogpost_title']; ?> | ID <?php echo $row['blogpost_id']; ?></h5>
-		<p class="card-text"><?php echo $row['blogpost_body']; ?></p>
-		<a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id']; ?> class="btn btn-success">View Post</a>
-		
-		<?php
+	<div class="card bg-dark text-white p-1" , style="margin-top:1rem">
+		<div class="card-body">
+			<h5 class="card-title"><?php echo $row['blogpost_title']; ?> | By: <?php echo $row['first_name']; ?></h5>
+			<p class="card-text"><?php echo $row['blogpost_body']; ?></p>
+			<a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id']; ?> class="btn btn-success">View Post</a>
+
+			<?php
 			if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
 			?>
 				<a href=<?php echo "update.php?id=" . $row['blogpost_id']; ?> class="btn btn-warning">Edit</a>
@@ -88,8 +90,8 @@ while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 			<?php
 			}
 			?>
+		</div>
 	</div>
-</div>
 
 <?php
 }
