@@ -1,4 +1,5 @@
 <?php
+include('./includes/non_admin_redirect.inc.php');
 // Needed imports to make guestbook work
 $page_title = "Make a Post | bLog";
 $errors = array();
@@ -6,22 +7,25 @@ $errors = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	require('mysqli_connect.php'); // Connect to the db.
-    require('includes/login_functions.inc.php'); // Import the redirect_user function
 
-	// Check for a first name:
+	// Check for a title:
 	if (empty($_POST['title'])) {
 		$errors[] = 'You forgot to enter a title for your post.';
 	} else {
-		$fname = mysqli_real_escape_string($dbc, trim($_POST['title']));
+		$title = mysqli_real_escape_string($dbc, trim($_POST['title']));
 	}
 
-	// Check for a last name:
+	// Check for a blogpost body:
 	if (empty($_POST['body'])) {
 		$errors[] = 'You forgot to enter a body for your post.';
 	} else {
-		$lname = mysqli_real_escape_string($dbc, trim($_POST['body']));
+		$body = mysqli_real_escape_string($dbc, trim($_POST['body']));
 	}
     if (empty($errors)){
+        $id = $_SESSION['user_id'];
+        $query = "INSERT INTO blogposts (user_id, blogpost_title, blogpost_body) VALUES ('$id', '$title', '$body')";
+        mysqli_query($dbc, $query);
+        
         redirect_user();
     }
 }
@@ -45,7 +49,7 @@ include('header.php');
 
                             <div class="form-outline form-white mb-4">
                                 <label class="form-label" for="body">Post Body</label>
-                                <textarea name="body" class="form-control form-control-lg" maxlength="20" value="<?php if (isset($_POST['body'])) echo $_POST['body']; ?>"></textarea>
+                                <textarea name="body" class="form-control form-control-lg"><?php if (isset($_POST['body'])) echo $_POST['body']; ?></textarea>
                             </div>
 
                             <button class="btn btn-outline-light btn-lg px-5" type="submit">Post</button>

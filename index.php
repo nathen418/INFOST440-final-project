@@ -74,7 +74,7 @@ $results = mysqli_query($dbc, $query);
 while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 ?>
 
-<div class="card bg-dark text-white p-1" , style="width:600px; margin-top:1rem">
+<div class="card bg-dark text-white p-1" , style="margin-top:1rem">
 	<div class="card-body">
 		<h5 class="card-title"><?php echo $row['blogpost_title']; ?> | ID <?php echo $row['blogpost_id']; ?></h5>
 		<p class="card-text"><?php echo $row['blogpost_body']; ?></p>
@@ -96,29 +96,29 @@ while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 
 // Make the links to other pages, if necessary.
 if ($pages > 1) {
-	echo '<br /><p>';
+	echo '<br /><div id="pages-container"><p>';
 	$current_page = ($start / $display) + 1;
 
 	// If it's not the first page, make a Previous button:
 	if ($current_page != 1) {
-		echo '<a href="?s=' . ($start - $display) . '&p=' . $pages . '&sort=' . $sort . '">Previous</a> ';
+		echo '<a href="?s=' . ($start - $display) . '&p=' . $pages . '&sort=' . $sort . '"><button type="button" class="btn btn-dark">Previous</button></a> ';
 	}
 
 	// Make all the numbered pages:
 	for ($i = 1; $i <= $pages; $i++) {
 		if ($i != $current_page) {
-			echo '<a href="?s=' . (($display * ($i - 1))) . '&p=' . $pages . '&sort=' . $sort . '">' . $i . '</a> ';
+			echo '<a href="?s=' . (($display * ($i - 1))) . '&p=' . $pages . '&sort=' . $sort . '"><button type="button" class="btn btn-dark">' . $i . '</button></a> ';
 		} else {
-			echo $i . ' ';
+			echo '<button type="button" class="btn btn-dark" disabled>' . $i . '</button> ';
 		}
 	} // End of FOR loop.
 
 	// If it's not the last page, make a Next button:
 	if ($current_page != $pages) {
-		echo '<a href="?s=' . ($start + $display) . '&p=' . $pages . '&sort=' . $sort . '">Next</a>';
+		echo '<a href="?s=' . ($start + $display) . '&p=' . $pages . '&sort=' . $sort . '"><button type="button" class="btn btn-dark">Next</button></a>';
 	}
 
-	echo '</p>'; // Close the paragraph.
+	echo '</p></div>'; // Close the paragraph and div.
 
 } // End of links section.
 

@@ -1,8 +1,6 @@
 <?php
-    include('./includes/login_functions.inc.php');
-    // if (!isset($_SESSION['user_id']) || $_SESSION['is_admin'] != 1) {
-    //     redirect_user();
-    // }
+    include('./includes/non_admin_redirect.inc.php');
+
     $page_title = 'Edit Post | bLog';
     include('header.php');
     include('mysqli_connect.php');
