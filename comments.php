@@ -38,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             mysqli_real_escape_string($dbc, trim($_POST['comment'])) : '';
 
         if ($comment == '') {
+            $_SESSION['message'] = 'empty';
             $valid_form = false;
         }
 
@@ -58,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $updateid = $_REQUEST['id'];
 
         if ($update == '') {
+            $_SESSION['message'] = 'empty';
             $valid_form = false;
         }
 
@@ -94,6 +96,9 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
                 break;
             case 'delete':
                 echo '<div class="alert alert-success text-center">Comment successfully deleted!</div>';
+                break;
+            case 'empty':
+                echo '<div class="alert alert-danger text-center">Your comment cannot be empty!</div>';
                 break;
             default:
                 echo '<div class="alert alert-danger text-center">You do not have permission for this action!</div>';
