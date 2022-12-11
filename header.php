@@ -36,6 +36,21 @@
 			float: none;
 			margin-bottom: 10px;
 			box-shadow: none;
+			width: 100%;
+			max-width: 600px;
+		}
+
+		#comments-container h2 {
+			margin: 1rem 1rem;
+		}
+
+		#comments-container .card {
+			border: none;
+			border-bottom: 2px solid gray;
+		}
+
+		#comments-container .card:last-of-type {
+			border: none;
 		}
 	</style>
 
