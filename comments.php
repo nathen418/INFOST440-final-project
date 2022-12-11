@@ -5,21 +5,41 @@ include('mysqli_connect.php');
 
 //Get whatever information you need from either GET, SESSION, or POST
 $blogid = mysqli_real_escape_string($dbc, trim($_GET['blogpost_id']));
+$updateid = isset($_GET['update_id']) ? mysqli_real_escape_string($dbc, trim($_GET['update_id'])) : '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $valid_form = true;
+    if (isset($_REQUEST['commentbtn'])) {
+        $valid_form = true;
 
-    $comment = isset($_REQUEST['comment']) ? 
-        mysqli_real_escape_string($dbc, trim($_POST['comment'])) : '';
+        $comment = isset($_REQUEST['comment']) ? 
+            mysqli_real_escape_string($dbc, trim($_POST['comment'])) : '';
 
-    if ($comment == '') {
-        $valid_form = false;
-    }
+        if ($comment == '') {
+            $valid_form = false;
+        }
 
-    if ($valid_form) {
-        $id = $_SESSION['user_id'];
-        $query = "INSERT INTO comments (blogpost_id, user_id, comment_body) VALUES ('$blogid', '$id', '$comment')";
-        $results = mysqli_query($dbc, $query);
+        if ($valid_form) {
+            $id = $_SESSION['user_id'];
+            $query = "INSERT INTO comments (blogpost_id, user_id, comment_body) VALUES ('$blogid', '$id', '$comment')";
+            $results = mysqli_query($dbc, $query);
+        }
+    } else {
+        $valid_form = true;
+
+        $update = isset($_REQUEST['update']) ? 
+            mysqli_real_escape_string($dbc, trim($_POST['update'])) : '';
+
+        $updateid = $_REQUEST['id'];
+
+        if ($update == '') {
+            $valid_form = false;
+        }
+
+        if ($valid_form) {
+            $query = "UPDATE comments SET comment_body = '$update' WHERE comment_id = '$updateid'";
+            mysqli_query($dbc, $query);
+            $updateid = '';
+        }
     }
 }
 
@@ -49,7 +69,7 @@ if (isset($_SESSION['user_id'])) {
             <div class="form-outline form-white mb-4">
                 <textarea name="comment" id="comment" class="form-control form-control-lg" maxlength="1024" value="<?php if (isset($_POST['comment'])) echo $_POST['comment']; ?>"></textarea>
             </div>
-            <input class="btn btn-primary" type="submit" value="Add Comment">
+            <input class="btn btn-primary" name="commentbtn" type="submit" value="Add Comment">
         <form>
 
 <?php
@@ -64,10 +84,23 @@ if (isset($_SESSION['user_id'])) {
 <?php
 //Your loop to display everything
 while ($row = mysqli_fetch_array($commentResult, MYSQLI_ASSOC)) {
+    ?>
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+<?php
+    if (isset($updateid) && $row['comment_id'] == $updateid && ($_SESSION['is_admin'] == 1 || $_SESSION['user_id'] == $row['user_id'])) {
 ?>
-    <div class="card bg-dark text-white">
-        <div class="card-body">
-            <!-- Change user_id to have their first name -->
+            <form style="margin-top:2rem" action=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id']; ?> method="post">
+                <label class="form-label" for="update">Edit Comment</label>
+                <div class="form-outline form-white mb-4">
+                    <input style="display: none;" name="id" value="<?php echo $row['comment_id'] ?>">
+                    <textarea name="update" id="update" class="form-control form-control-lg" maxlength="1024"><?php echo $row['comment_body']; ?></textarea>
+                </div>
+                <input class="btn btn-primary" type="submit" value="Edit Comment">
+            <form>
+<?php
+    } else {
+?>
             <h5 class="card-title"><?php echo $row['first_name']; ?></h5>
             <p class="card-text"><?php echo $row['comment_body']; ?></p>
 
@@ -76,7 +109,7 @@ while ($row = mysqli_fetch_array($commentResult, MYSQLI_ASSOC)) {
             ?>
 
                 <!-- Make these buttons functional -->
-                <a href=<?php ?> class="btn btn-warning">Edit</a>
+                <a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id'] . "&update_id=" . $row['comment_id']; ?> class="btn btn-warning">Edit</a> |
                 <a href=<?php ?> class="btn btn-danger">Delete</a>
             <?php
                 }
@@ -84,6 +117,7 @@ while ($row = mysqli_fetch_array($commentResult, MYSQLI_ASSOC)) {
         </div>
     </div>
 <?php
+    }
 }
 ?>
 </div>
