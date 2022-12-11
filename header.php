@@ -47,6 +47,7 @@
 		#comments-container .card {
 			border: none;
 			border-bottom: 2px solid gray;
+			margin-bottom: 1rem
 		}
 
 		#comments-container .card:last-of-type {
@@ -55,6 +56,12 @@
 
 		.alert p {
 			margin: 0.5rem;
+		}
+
+		.alert {
+			width: 100%;
+			max-width: 600px;
+			margin: 1rem auto;
 		}
 
 		#pages-container {
@@ -67,7 +74,7 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand navbar-dark bg-dark rounded-bottom">
+	<nav class="navbar navbar-expand navbar-dark bg-dark rounded-bottom sticky-top">
 		<div class="container-fluid">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<a class="navbar-brand" href="index.php">

@@ -6,26 +6,26 @@ $errors = array();
 // Check for form submission:
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-	require('mysqli_connect.php'); // Connect to the db.
+    require('mysqli_connect.php'); // Connect to the db.
 
-	// Check for a title:
-	if (empty($_POST['title'])) {
-		$errors[] = 'You forgot to enter a title for your post.';
-	} else {
-		$title = mysqli_real_escape_string($dbc, trim($_POST['title']));
-	}
+    // Check for a title:
+    if (empty($_POST['title'])) {
+        $errors[] = 'You forgot to enter a title for your post.';
+    } else {
+        $title = mysqli_real_escape_string($dbc, trim($_POST['title']));
+    }
 
-	// Check for a blogpost body:
-	if (empty($_POST['body'])) {
-		$errors[] = 'You forgot to enter a body for your post.';
-	} else {
-		$body = mysqli_real_escape_string($dbc, trim($_POST['body']));
-	}
-    if (empty($errors)){
+    // Check for a blogpost body:
+    if (empty($_POST['body'])) {
+        $errors[] = 'You forgot to enter a body for your post.';
+    } else {
+        $body = mysqli_real_escape_string($dbc, trim($_POST['body']));
+    }
+    if (empty($errors)) {
         $id = $_SESSION['user_id'];
         $query = "INSERT INTO blogposts (user_id, blogpost_title, blogpost_body) VALUES ('$id', '$title', '$body')";
         mysqli_query($dbc, $query);
-        
+
         redirect_user();
     }
 }
@@ -33,7 +33,6 @@ include('header.php');
 ?>
 <br />
 <form action="post.php" method="POST">
-    <section class="vh-100">
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -70,7 +69,6 @@ include('header.php');
                 </div>
             </div>
         </div>
-    </section>
 </form>
 <?php
 include('footer.php');
