@@ -7,7 +7,6 @@ $errors = array();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 	require('mysqli_connect.php'); // Connect to the db.
-    require('includes/login_functions.inc.php'); // Import the redirect_user function
 
 	// Check for a title:
 	if (empty($_POST['title'])) {
@@ -23,7 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$body = mysqli_real_escape_string($dbc, trim($_POST['body']));
 	}
     if (empty($errors)){
-        session_start();
         $id = $_SESSION['user_id'];
         $query = "INSERT INTO blogposts (user_id, blogpost_title, blogpost_body) VALUES ('$id', '$title', '$body')";
         mysqli_query($dbc, $query);
