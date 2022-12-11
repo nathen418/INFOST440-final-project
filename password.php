@@ -1,7 +1,7 @@
 <?php # Script 9.7 - password.php
 // This page lets a user change their password.
 
-$page_title = 'Change Your Password';
+$page_title = 'Change Password | bLog';
 include ('header.php');
 $errors = array();
 
@@ -138,9 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 									exit();
 								}
 								?>
-							</div>
-							<div>
-								<p class="mb-0">Already have an account?<a href="login.php" class="text-white-50 fw-bold">Log In</a></p>
 							</div>
 						</div>
 					</div>

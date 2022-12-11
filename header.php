@@ -6,15 +6,14 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="nofollow" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="./resources/logo.png" type="image/x-icon">
 	<title><?php echo $page_title; ?></title>
 	<meta name="description" content="Slowly reinventing WordPress one poorly coded final project at a time">
 	<meta name="keywords" content="Nathen, Nathan">
 	<meta name="author" content="Nathen and Nathan">
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="440 Blog">
+	<meta property="og:title" content="bLog">
 	<meta property="og:description" content="The badly designed blog">
 	<meta property="theme-color" content="#6761A8">
 
@@ -23,82 +22,19 @@
 			text-align: center;
 		}
 
-		/* Get guestbook cards in center, also make responsive */
-		.card {
-			width: 90%;
-			max-width: 600px;
-			margin: 0 auto;
-			margin-bottom: 30px;
-			box-shadow: 2px 5px 5px lightgray;
-			border-radius: 5px;
-		}
-
-		.header {
-			background-color: #dbd1c4;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 5px 20px;
-			border-radius: 5px 5px 0 0;
-		}
-
-		.header h1 {
-			font-size: 1.4em;
-			margin-right: 20px;
-		}
-
-		.header p {
-			font-weight: bold;
-		}
-
 		.content {
 			padding: 5px 20px;
 		}
 
-	.blogpost_content {
-		padding: 5px 20px;
-	}
-
-	/* Differentiate date from blogpost content */
-	.blogpost_content > .timestamp {
-		font-style: italic;
-		font-size: 0.9em;
-		text-align: right;
-		color: gray;
-	}
-  
-		/* Nav bar  */
-		#navigation {
-			display: flex;
-			justify-content: right;
-		}
-
-
-		#navigation ul {
-			list-style-type: none;
-			margin: 0;
-			padding: 0;
-			overflow: hidden;
-		}
-
-		#navigation li {
-			float: left;
-		}
-
-		#navigation li a {
-			display: block;
-			padding: 8px;
-			background-color: #dddddd;
-		}
-
 		body {
-			/* fallback for old browsers */
 			background: #6a11cb;
-			/* Chrome 10-25, Safari 5.1-6 */
 			background: -webkit-linear-gradient(right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 		}
-		
+
 		.card {
+			margin: 0 auto;
+			float: none;
+			margin-bottom: 10px;
 			box-shadow: none;
 		}
 	</style>
@@ -106,31 +42,46 @@
 </head>
 
 <body>
-	<div id="navigation">
-		<ul>
-			<li><a href="index.php">Home Page</a></li>
-			<li><a href="register.php">Register</a></li>
-			<li><a href="view_users.php">View Users</a></li>
-			<li><a href="password.php">Change Password</a></li>
-			<?php
+	<nav class="navbar navbar-expand navbar-dark bg-dark rounded-bottom">
+		<div class="container-fluid">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<a class="navbar-brand" href="index.php">
+					<img src="resources/logo.png" height="32" alt="bLog Logo" loading="lazy" />
+				</a>
+				<a class="navbar-brand" href="index.php">bLog</a>
+				<li class="nav-item">
+					<a class="nav-link" aria-current="page" href="index.php">Home</a>
+				</li>
+				<?php
 				if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
-			?>
-			<li><a href="adminpanel.php">Admin Panel</a></li>
-			<?php 
-				}
-			?>
-			<li>
-			<?php 
+				?>
+					<li class="nav-item">
+						<a class="nav-link" href="post.php">Post</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="admin.php">Admin Panel</a>
+					</li>
+				<?php }
 				// Create a login/logout link:
-				if ( (isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php') ) {
-					echo '<a href="logout.php">Logout</a>';
-				} else {
-					echo '<a href="login.php">Login</a>';
-				}
-			?>
-			</li>
-		</ul>
-	</div>
+				if ((isset($_SESSION['user_id'])) && (basename($_SERVER['PHP_SELF']) != 'logout.php')) { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="logout.php">Logout</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="password.php">Change Password</a>
+					</li>
+				<?php } else { ?>
+					<li class="nav-item">
+						<a class="nav-link" href="login.php">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="register.php">Register</a>
+					</li>
+				<?php } ?>
+				<li class="nav-item">
+					<a class="nav-link" href=""><?php echo @$_SESSION['first_name']; ?></a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<div id="content">
-		<!-- Start of the page-specific content. -->
-		<!-- Script 12.7 - header.html -->

@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION['agent'] = md5($_SERVER['HTTP_USER_AGENT']);
 
 		// Redirect:
-		redirect_user('loggedin.php');
+		redirect_user('index.php');
 			
 	} else { // Unsuccessful!
 
