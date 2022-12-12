@@ -69,6 +69,7 @@ $errors = array();
 				}
 				?>
 
+				<!-- Register card -->
 				<div class="card bg-dark text-white" style="border-radius: 1rem;">
 					<div class="card-body px-5 text-center">
 						<h2 class="fw-bold mb-2 text-uppercase">Register</h2>
@@ -100,6 +101,8 @@ $errors = array();
 						</div>
 
 						<button class="btn btn-outline-light btn-lg px-5" type="submit">Sign Up</button>
+
+						<!-- Show any errors that happened -->
 						<?php
 						if ($errors) {
 							echo '<p class="error">The following error(s) occurred:<br />';

@@ -149,7 +149,7 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
                             <label class="form-label" for="update">Edit Comment</label>
                             <div class="form-outline form-white mb-4">
                                 <input style="display: none;" name="id" value="<?php echo $row['comment_id'] ?>">
-                                <textarea name="update" id="update" class="form-control form-control-lg" maxlength="1024"><?php echo $row['comment_body']; ?></textarea>
+                                <textarea name="update" id="update" class="form-control form-control-lg" maxlength="1024"><?php echo $row['comment_body']; ?></textarea> <!-- This is not sticky on purpose so as to make spam posting comments harder -->
                             </div>
                             <input class="btn btn-primary" type="submit" value="Edit Comment">
                             <button class="btn btn-danger" name="cancelbtn">Cancel</button>

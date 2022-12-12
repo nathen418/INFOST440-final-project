@@ -14,13 +14,5 @@ include('header.php');
 			include 'includes/view_users.inc.php';
 			?>
 		</p>
-		<?php
-		if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
-		?>
-			<a href="" class="btn btn-warning">Edit</a>
-			<a href="" class="btn btn-danger">Delete</a>
-		<?php
-		}
-		?>
 	</div>
 </div>

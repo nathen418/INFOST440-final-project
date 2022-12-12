@@ -4,6 +4,10 @@ $page_title = 'Edit Post | bLog';
 include('mysqli_connect.php');
 $errors = array();
 
+// Redirect user back to the index if no id was provided. e.g. if user typed in the URL manually
+if (empty($_GET['id'])) {
+    redirect_user();
+}
 // Get Id from URL path
 $id = isset($_GET['id']) ? $_GET['id'] : '';
 

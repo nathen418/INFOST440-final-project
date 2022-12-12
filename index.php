@@ -3,23 +3,17 @@
 $page_title = 'Home | bLog';
 include('header.php');
 include('mysqli_connect.php');
-
-
 ?>
 <p class="h2 text-center text-white" style="margin-top:4rem">bLog</p>
 <p class="h4 text-center text-white">The less useful version of wordpress</p>
-
 <?php
-// Display a list of posts here
-// On each post, there should be a link to view the post and comments, and a link to add a comment. If the user is logged in, there should be a link to edit the post and delete the post if it was made by the logged in user. 
 
-// Display a few buttons that allow for the posts to be sorted
-// Number of records to show per page:
+// Code to handle pagination
 $display = 5;
 // Determine how many pages there are...
 if (isset($_GET['p']) && is_numeric($_GET['p'])) { // Already been determined.
 	$pages = $_GET['p'];
-} else { // Need to determine.
+} else {
 	// Count the number of records:
 	$query = "SELECT COUNT(blogpost_id) FROM blogposts";
 	$result = mysqli_query($dbc, $query);
@@ -27,7 +21,7 @@ if (isset($_GET['p']) && is_numeric($_GET['p'])) { // Already been determined.
 	$records = $rowPage[0];
 
 	// Calculate the number of pages...
-	if ($records > $display) { // More than 1 page.
+	if ($records > $display) {
 		$pages = ceil($records / $display);
 	} else {
 		$pages = 1;
@@ -67,12 +61,12 @@ switch ($sort) {
 	<a href="?sort=oldest" class="btn btn-primary">Oldest</a>
 </div>
 <?php
-// Fetches all blogposts, then generates cards
-$query = "SELECT * FROM blogposts JOIN users USING (user_id) ORDER BY $order_by LIMIT $start, $display";
 
-// $query = "SELECT * FROM blogposts ORDER BY $order_by LIMIT $start, $display";
+// Fetch all the blogposts
+$query = "SELECT * FROM blogposts JOIN users USING (user_id) ORDER BY $order_by LIMIT $start, $display";
 $results = mysqli_query($dbc, $query);
 
+// Loop Through the blogposts and create cards for them
 while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 ?>
 
@@ -85,6 +79,7 @@ while ($row = mysqli_fetch_array($results, MYSQLI_ASSOC)) {
 			<?php
 			if (isset($_SESSION['user_id']) && $_SESSION['is_admin'] == 1) {
 			?>
+				<!-- Edit and Delete buttons for each posts if admin -->
 				<a href=<?php echo "update.php?id=" . $row['blogpost_id']; ?> class="btn btn-warning">Edit</a>
 				<a href=<?php echo "delete.php?id=" . $row['blogpost_id']; ?> class="btn btn-danger">Delete</a>
 			<?php
@@ -113,16 +108,15 @@ if ($pages > 1) {
 		} else {
 			echo '<button type="button" class="btn btn-dark" disabled>' . $i . '</button> ';
 		}
-	} // End of FOR loop.
+	}
 
 	// If it's not the last page, make a Next button:
 	if ($current_page != $pages) {
 		echo '<a href="?s=' . ($start + $display) . '&p=' . $pages . '&sort=' . $sort . '"><button type="button" class="btn btn-dark">Next</button></a>';
 	}
 
-	echo '</p></div>'; // Close the paragraph and div.
+	echo '</p></div>';
 
-} // End of links section.
-
+}
 include('footer.php');
 ?>
