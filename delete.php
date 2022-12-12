@@ -31,7 +31,7 @@ include('header.php');
 
 while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 ?>
-    <form action="<?php echo "delete.php?id=" . $delete_id; ?>" method="POST">
+    <form action="<?php echo "delete?id=" . $delete_id; ?>" method="POST">
         <!-- Create a container where the cards will live -->
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center">

@@ -5,7 +5,7 @@ $page_title = 'Register | bLog';
 include('header.php');
 $errors = array();
 ?>
-<form action="register.php" method="post">
+<form action="register" method="post">
 	<div class="container py-5">
 		<div class="row d-flex justify-content-center align-items-center">
 			<div class="col-12 col-md-8 col-lg-6 col-xl-5">

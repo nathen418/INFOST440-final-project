@@ -25,7 +25,7 @@ if (isset($_GET['delete_id'])) {
         } else {
             // Otherwise they get redirected to the original blogpost page
             $_SESSION['message'] = false;
-            redirect_user('comments.php?blogpost_id=' . $blogid);
+            redirect_user('comments?blogpost_id=' . $blogid);
         }
     }
 }
@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $results = mysqli_query($dbc, $query);
         }
     } else if (isset($_REQUEST['cancelbtn'])) {
-        redirect_user('comments.php?blogpost_id=' . $blogid);
+        redirect_user('comments?blogpost_id=' . $blogid);
     } else {
         $valid_form = true;
 
@@ -118,14 +118,14 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
     if (isset($_SESSION['user_id'])) {
         // Form not visible if user is not logged in
         ?>
-            <form style="margin-top:2rem" action=<?php echo "comments.php?blogpost_id=" . $blogid; ?> method="post">
+            <form style="margin-top:2rem" action=<?php echo "comments?blogpost_id=" . $blogid; ?> method="post">
                 <label class="form-label" for="comment">New Comment</label>
                 <div class="form-outline form-white mb-4">
                     <textarea name="comment" id="comment" class="form-control form-control-lg" maxlength="1024"><?php if (isset($_POST['comment'])) echo $_POST['comment']; ?></textarea>
                 </div>
                 <input class="btn btn-primary" name="commentbtn" type="submit" value="Add Comment">
-                <form>
-                <?php
+            <form>
+            <?php
             }
                 ?>
         </div>
@@ -145,7 +145,7 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
                         ($_SESSION['is_admin'] == 1 || $_SESSION['user_id'] == $row['user_id'])
                     ) {
                     ?>
-                        <form style="margin-top:2rem" action=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id']; ?> method="post">
+                        <form style="margin-top:2rem" action=<?php echo "comments?blogpost_id=" . $row['blogpost_id']; ?> method="post">
                             <label class="form-label" for="update">Edit Comment</label>
                             <div class="form-outline form-white mb-4">
                                 <input style="display: none;" name="id" value="<?php echo $row['comment_id'] ?>">
@@ -164,8 +164,8 @@ while ($row = mysqli_fetch_array($blogpostResult, MYSQLI_ASSOC)) {
                                 <?php
                                 if (isset($_SESSION['user_id']) && ($_SESSION['is_admin'] == 1 || $_SESSION['user_id'] == $row['user_id'])) {
                                 ?>
-                                    <a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id'] . "&update_id=" . $row['comment_id']; ?> class="btn btn-warning">Edit</a>
-                                    <a href=<?php echo "comments.php?blogpost_id=" . $row['blogpost_id'] . "&delete_id=" . $row['comment_id']; ?> class="btn btn-danger">Delete</a>
+                                    <a href=<?php echo "comments?blogpost_id=" . $row['blogpost_id'] . "&update_id=" . $row['comment_id']; ?> class="btn btn-warning">Edit</a>
+                                    <a href=<?php echo "comments?blogpost_id=" . $row['blogpost_id'] . "&delete_id=" . $row['comment_id']; ?> class="btn btn-danger">Delete</a>
                                 <?php
                                 }
                                 ?>

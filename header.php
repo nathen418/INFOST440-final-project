@@ -80,7 +80,7 @@
 	<nav class="navbar navbar-expand navbar-dark bg-dark rounded-bottom sticky-top">
 		<div class="container-fluid">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<a class="navbar-brand" href="index.php">
+				<a class="navbar-brand" href="index">
 					<img src="resources/logo.png" height="32" alt="bLog Logo" loading="lazy" />
 				</a>
 				<a class="navbar-brand" href="index.php">bLog</a>
