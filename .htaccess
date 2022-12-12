@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# To externally redirect /dir/file.php to /dir/file
+RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,NE,L]
+
+## To internally rewrite /dir/file to /dir/file.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]

@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include('header.php');
 ?>
 <br />
-<form action="post.php" method="POST">
+<form action="post" method="POST">
         <div class="container py-5">
             <div class="row d-flex justify-content-center align-items-center">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">

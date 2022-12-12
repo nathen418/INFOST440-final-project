@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 } // End of the main Submit conditional.
 ?>
-<form action="password.php" method="post">
+<form action="password" method="post">
 	<div class="container py-5">
 		<div class="row d-flex justify-content-center align-items-center">
 			<div class="col-12 col-md-8 col-lg-6 col-xl-5">
