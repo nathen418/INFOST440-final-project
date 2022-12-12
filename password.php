@@ -2,7 +2,7 @@
 // This page lets a user change their password.
 
 $page_title = 'Change Password | bLog';
-include('header.php');
+include('./includes/non_admin_redirect.inc.php');
 $errors = array();
 
 // Check for form submission:
@@ -54,39 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			if (mysqli_affected_rows($dbc) == 1) { // If it ran OK.
 
 				// Print a message.
-				echo '<h1>Thank you!</h1>
-				<p>Your password has been updated. In Chapter 12 you will actually be able to log in!</p><p><br /></p>';
+				redirect_user();
 			} else { // If it did not run OK.
 
 				// Public message:
-				echo '<h1>System Error</h1>
-				<p class="error">Your password could not be changed due to a system error. We apologize for any inconvenience.</p>';
+				$errors[] = 'Your password could not be changed due to a system error. We apologize for any inconvenience.';
 
-				// Debugging message:
-				echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $query . '</p>';
 			}
-
-			mysqli_close($dbc); // Close the database connection.
-
-			// Include the footer and quit the script (to not show the form).
-			include('footer.php');
-			exit();
 		} else { // Invalid email address/password combination.
-			echo '<h1>Error!</h1>
-			<p class="error">The email address and password do not match those on file.</p>';
+			$errors[] = 'The email address and password do not match those on file.';
 		}
-	} else { // Report the errors.
-
-		echo '<h1>Error!</h1>
-		<p class="error">The following error(s) occurred:<br />';
-		foreach ($errors as $msg) { // Print each error.
-			echo " - $msg<br />\n";
-		}
-		echo '</p><p>Please try again.</p>';
-	} // End of if (empty($errors)) IF.
-
-	mysqli_close($dbc); // Close the database connection.
-
+	}
+	include('header.php');
 } // End of the main Submit conditional.
 ?>
 <form action="password" method="post">
