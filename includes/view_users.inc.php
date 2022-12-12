@@ -5,7 +5,8 @@
 require ('mysqli_connect.php'); // Connect to the db.
 		
 // Make the query:
-$query = "SELECT CONCAT(last_name, ', ', first_name) AS name, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr FROM users ORDER BY registration_date ASC";		
+// add email to the query
+$query = "SELECT CONCAT(last_name, ', ', first_name) AS name, email, DATE_FORMAT(registration_date, '%M %d, %Y') AS dr FROM users ORDER BY registration_date ASC";		
 $result = @mysqli_query ($dbc, $query); // Run the query.
 
 // Count the number of returned rows:
@@ -17,12 +18,12 @@ if ($num > 0) { // If it ran OK, display the records.
 	echo "<p>There are currently $num registered users.</p>\n";
 
 	// Table header.
-	echo '<table class="text-white" cellspacing="3" cellpadding="3" width="75%">
-	<tr><td align="left"><b>Name</b></td><td align="left"><b>Date Registered</b></td></tr>';
+	echo '<table class="text-white" cellspacing="3" cellpadding="3" width="100%">
+	<tr><td align="left"><b>Name</b></td><td align="left"><b>Email</b></td><td align="left"><b>Date Registered</b></td></tr>';
 	
 	// Fetch and print all the records:
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-		echo '<tr><td align="left">' . $row['name'] . '</td><td align="left">' . $row['dr'] . '</td></tr>
+		echo '<tr><td align="left">' . $row['name'] . '</td><td align="left">' . $row['email'] . '</td><td align="left">' . $row['dr'] . '</td></tr>
 		';
 	}
 

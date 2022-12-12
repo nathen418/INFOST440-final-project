@@ -6,7 +6,7 @@ include('header.php');
 
 <p class="h2 text-center text-white" style="margin-top:4rem">Admin Panel</p>
 
-<div class="card bg-dark text-white" style="width:500px">
+<div class="card bg-dark text-white">
 	<div class="card-body">
 		<h5 class="card-title">Registered Users</h5>
 		<p class="card-text">
